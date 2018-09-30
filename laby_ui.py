@@ -1,8 +1,5 @@
 #! /usr/bin/env python3
 # coding: utf-8
-
-"""graphic librairie for labyrinths"""
-
 import pygame
 from pygame.locals import *
 
@@ -14,14 +11,13 @@ une classe qui s'occupe de la représentation graphique
 """
 
 
-class LabyGraphics():
+class laby_ui():
 
     STEP = 30
 
     def __init__(self):
         pygame.init()
         self.window = pygame.display.set_mode((640, 480))
-        self.laby = []
 
     def game_loop(self, laby):
         """
@@ -165,9 +161,9 @@ class Perso():
 
 
 def main():
-    game = LabyGraphics()
+    game = laby_ui()
     game.menu_loop()
-    labyrinth = LabyGenerator()
+    labyrinth = Laby_gen()
     game.game_loop(labyrinth.generate(21, 15))
 
 if __name__ == "__main__":
