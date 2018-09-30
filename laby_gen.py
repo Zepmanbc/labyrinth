@@ -1,30 +1,38 @@
 #! /usr/bin/env python3
 # coding: utf-8
+
+"""
+    Labyrinth generator librairie
+"""
+
 import os
 import json
 from random import choice
 
 import numpy
 
-"""
-generer le labirynth
-faire un objet qui renvoi le labirynth sous forme de tableau
-avec un caractère hexa pour définir la cellule
-utiliser des labirynth prédéfini qui sont sauvegardé en json
-pour l'instant
+# generer le labirynth
+# faire un objet qui renvoi le labirynth sous forme de tableau
+# avec un caractère hexa pour définir la cellule
+# utiliser des labirynth prédéfini qui sont sauvegardé en json
+# pour l'instant
 
-une classe qui ressort un tableau du labi
+# une classe qui ressort un tableau du labi
 
-classe de génération de labi
-on la défini par la taille x/y et ca nous renvoi un tableau 2 dimensions
-on l'appel labi_gen(x,*y)
-si il n'y a pas de y alors on ressort un labi existatne et sauvegardé
-dans un json
-"""
+# classe de génération de labi
+# on la défini par la taille x/y et ca nous renvoi un tableau 2 dimensions
+# on l'appel labi_gen(x,*y)
+# si il n'y a pas de y alors on ressort un labi existatne et sauvegardé
+# dans un json
 
 
-class Laby_gen():
-
+class LabyGenerator():
+    """
+    Labyrinth generator
+    1 - init
+    2 - call generate(x, y)
+    then return a list pour cases formats
+    """
     # { case : (Up,Right,Down,Left)}
     MOVES = {
         "0": (0, 0, 0, 0),
@@ -76,13 +84,11 @@ class Laby_gen():
                 table = self.break_the_wall(pointer, go_to, table)
                 pointer = go_to
                 path.append(pointer)
-            print(pointer)
+            # print(pointer)
         return self.translate_table(table)
 
     def get_around_cases(self, pointer, table):
-        """
-        get the non visited possible cases around the pointer
-        """
+        """get the non visited possible cases around the pointer"""
         row_max, column_max = len(table), len(table[0])
         all_cases = [self.go_north(pointer), self.go_est(pointer),
                      self.go_south(pointer), self.go_west(pointer)]
@@ -96,7 +102,9 @@ class Laby_gen():
                     cases.append(case)
         return cases
 
-    def test_all_visited(self, table):
+    @staticmethod
+    def test_all_visited(table):
+        """look if there is still no visited case"""
         for row in table:
             for column in row:
                 if column[4] == 0:
@@ -104,9 +112,7 @@ class Laby_gen():
         return True
 
     def break_the_wall(self, from_case, to_case, table):
-        """
-        make the wall disapear in the 2 visited cases
-        """
+        """make the 'wall' disapear in the 2 visited cases"""
         # to the North
         if from_case[1] - to_case[1] == -1:
             table[(self.coord(from_case))][2] = 0
@@ -129,12 +135,15 @@ class Laby_gen():
         return table
 
     def translate_table(self, table):
+        """
+        Translate the 4 directions case into a code case
+        see the MOVES dict
+        """
         translate_table = []
-        x_pos, y_pos = 0, 0
         for rows in table:
             translate_row = ""
             for case in rows:
-                for case_type in self.MOVES.keys():
+                for case_type in self.MOVES:
                     current_case = case[:4]
                     # need to numpy the tuple to compare same things
                     model_case = numpy.array(self.MOVES[case_type])
@@ -143,28 +152,33 @@ class Laby_gen():
             translate_table.append(translate_row)
         return translate_table
 
-    def coord(self, pointer):
-        """
-        invert pointer to be (x,y) coordonates
-        """
+    @staticmethod
+    def coord(pointer):
+        """invert pointer to be (x,y) coordonates"""
         return (pointer[1], pointer[0])
 
-    def go_north(self, pointer):
+    @staticmethod
+    def go_north(pointer):
+        """return the pointer one case to the north"""
         return (pointer[0], pointer[1] - 1)
 
-    def go_est(self, pointer):
+    @staticmethod
+    def go_est(pointer):
+        """return the pointer one case to the east"""
         return (pointer[0] + 1, pointer[1])
 
-    def go_south(self, pointer):
+    @staticmethod
+    def go_south(pointer):
+        """return the pointer one case to the south"""
         return (pointer[0], pointer[1] + 1)
 
-    def go_west(self, pointer):
+    @staticmethod
+    def go_west(pointer):
+        """return the pointer one case to the west"""
         return (pointer[0] - 1, pointer[1])
 
     def getout(self, number):
-        """
-        return the laby code
-        """
+        """return the laby code saved in the json file"""
         data = self.read_saved_laby()
         # faire un test si le numéro existe
         try:
@@ -174,29 +188,27 @@ class Laby_gen():
             return False
 
     def save_laby(self, number, code):
-        """
-        save a existing laby in a json file
-        """
+        """save a generated laby in a json file"""
         data = self.read_saved_laby()
         data[number] = code
         file = open(self.laby_data_file, "r+")
         json.dump(data, file)
 
     def read_saved_laby(self):
-        """
-        read the json file et return a list on laby number with x/y
-        """
+        """read the json file et return a list on laby number with x/y """
         with open(self.laby_data_file, "r") as json_data:
             data = json.load(json_data)
         return data
 
 
 def main():
+    """test function"""
     # os.remove("data/laby_data.json")
-    laby = Laby_gen()
+    laby = LabyGenerator()
     code = laby.generate(20, 15)
-    laby.save_laby(4, code)
-    print(laby.getout(4))
+    # laby.save_laby(4, code)
+    # print(laby.getout(4))
+    print(code)
 
 if __name__ == "__main__":
     main()
