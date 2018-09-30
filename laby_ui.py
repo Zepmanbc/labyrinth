@@ -164,7 +164,7 @@ def main():
     game = laby_ui()
     game.menu_loop()
     labyrinth = Laby_gen()
-    game.game_loop(labyrinth.getout(1))
+    game.game_loop(labyrinth.generate(21, 15))
 
 if __name__ == "__main__":
     main()
