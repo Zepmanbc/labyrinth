@@ -100,7 +100,6 @@ class LabyGUI():
                          pygame.Color('#FFFFFFFF'),
                          (0, 0, 640, 480))
         x_pos, y_pos = 0, 0
-        # pygame.draw.rect(self.window,pygame.Color('#FFFFFFFF'),(0,0,640,480))
         for row in code:
             x_pos = 0
             for column in row:
