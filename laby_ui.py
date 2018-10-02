@@ -33,7 +33,7 @@ class LabyGUI():
         self.laby = laby[0]
         self.longuest = laby[1]
         self.last_case = self.longuest[-1]
-        move_left = len(self.longuest)
+        move_left = len(self.longuest) - 1
         # pygame.draw.rect(self.window,
         #                  pygame.Color('#FFFFFFFF'),
         #                  (0, 0, 640, 480))
@@ -52,6 +52,9 @@ class LabyGUI():
                 if event.type == pygame.QUIT:
                     loop = False
                 if event.type == KEYDOWN:
+                    print(event.key)
+                    if event.key == 113:  # Q
+                        loop = False
                     if event.key == K_DOWN:
                         self.perso.down()
                     if event.key == K_UP:
@@ -61,8 +64,6 @@ class LabyGUI():
                     if event.key == K_LEFT:
                         self.perso.left()
                 self.load_laby(self.laby)
-                
-                
                 self.load_treasure(self.last_case)
                 move_left = self.perso.load()
                 self.bottom_text(move_left)
@@ -74,25 +75,22 @@ class LabyGUI():
                         self.end_party_text("You Loose...")
                     self.show_path(self.longuest)
                     self.perso.load()
-
-                
                 pygame.display.flip()
 
     def bottom_text(self, move_left):
         label = self.myfont.render("moves left : {}".format(move_left),
-                                   0, (0,0,0))
+                                   0, (0, 0, 0))
         self.window.blit(label, (10, 450))
 
     def end_party_text(self, text):
         label = self.myfont.render(text, 0, (0, 0, 0))
         self.window.blit(label, (350, 450))
 
-
     def load_treasure(self, case):
         """show the treasure icon to the specified case"""
         treasure = pygame.image.load("data/treasure.png").convert_alpha()
         self.window.blit(treasure, self.coord(case))
-    
+
     def load_laby(self, code):
         """inside method for showing the laby"""
         # background => white for the moment
@@ -132,12 +130,13 @@ class LabyGUI():
                     loop = False
                 self.window.blit(fond, (0, 0))
                 pygame.display.flip()
-    
+
     def coord(self, case):
         """return pixel postision from a grid coordonates"""
         x_pos = case[0] * self.STEP
         y_pos = case[1] * self.STEP
         return (x_pos, y_pos)
+
 
 class Perso():
     """Class that generate the perso"""
@@ -222,10 +221,11 @@ class Perso():
 def main():
     """Test function"""
     game = LabyGUI()
-    game.menu_loop()
+    # game.menu_loop()
     labyrinth = LabyGenerator()
-    # game.game_loop(labyrinth.generate(21, 15))
-    game.game_loop(labyrinth.generate(10, 10))
+    game.game_loop(labyrinth.generate(21, 15))
+    # game.game_loop(labyrinth.generate(10, 10))
+    # game.game_loop(labyrinth.getout("0"))
 
 if __name__ == "__main__":
     main()

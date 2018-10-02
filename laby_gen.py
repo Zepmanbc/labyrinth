@@ -87,28 +87,28 @@ class LabyGenerator():
                 # go back
                 if not go_back:
                     self.path_record.append(path[:])
+                    path.pop()
                     # record a ended path
                 go_back = True
                 pointer = path.pop()
             else:
+                if go_back:
+                    path.append(pointer)
+                go_back = False
                 # choose a random direction not visited
                 go_to = choice(possible_cases)
                 table = self.break_the_wall(pointer, go_to, table)
                 pointer = go_to
                 path.append(pointer)
-                go_back = False
             # print(pointer)  #print the path
         self.longuest_path()
         return self.translate_table(table), self.longuest_path()
 
     def longuest_path(self):
-        self.path_record.sort(key = len)
+        self.path_record.sort(key=len)
         longuest = self.path_record[-1]
         print(len(longuest))
         print(longuest[-1])
-
-        # faire un test pour vérifier qu'il n'y aitpas d'incohérence dans la chaine
-
         return longuest
 
     def get_around_cases(self, pointer, table):
@@ -215,12 +215,10 @@ class LabyGenerator():
             return False
 
     def save_laby(self, number, code, longuest):
-        """
-        save a existing laby in a json file
-        """
+        """ save a existing laby in a json file """
         data = self.read_saved_laby()
-        data[number] = code, longuest
-        file = open(self.laby_data_file, "r+")
+        data[str(number)] = code, longuest
+        file = open(self.laby_data_file, "w")
         json.dump(data, file)
 
     def read_saved_laby(self):
@@ -234,11 +232,11 @@ class LabyGenerator():
 
 def main():
     """test function"""
-    os.remove("data/laby_data.json")
+    # os.remove("data/laby_data.json")
     laby = LabyGenerator()
-    code, longuest = laby.generate(20, 15)
+    code, longuest = laby.generate(10, 10)
     laby.save_laby(0, code, longuest)
-    print(laby.getout(0))
+    # print(laby.getout(0))
 
 if __name__ == "__main__":
     main()
