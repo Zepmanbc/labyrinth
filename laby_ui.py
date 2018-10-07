@@ -38,6 +38,7 @@ class LabyGUI():
         #                  pygame.Color('#FFFFFFFF'),
         #                  (0, 0, 640, 480))
         self.load_laby(self.laby)
+        self.load_treasure(self.last_case)
         self.perso = Perso(self.window, self.STEP, self.laby, move_left)
         pygame.display.flip()
 
@@ -47,7 +48,7 @@ class LabyGUI():
         loop = True
         while loop:
             # pour limiter à 30fps
-            pygame.time.Clock().tick(30)
+            # pygame.time.Clock().tick(30)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     loop = False
@@ -63,20 +64,20 @@ class LabyGUI():
                         self.perso.right()
                     if event.key == K_LEFT:
                         self.perso.left()
-                self.load_laby(self.laby)
-                self.load_treasure(self.last_case)
-                move_left = self.perso.load()
-                self.bottom_text(move_left)
-                if move_left <= 0:
-                    perso_position = self.perso.return_position()
-                    if perso_position == self.last_case:
-                        self.end_party_text("You Win!!!")
-                    else:
-                        self.end_party_text("You Loose...")
-                    self.show_path(self.longuest)
-                    self.perso.load()
-                pygame.display.flip()
-
+                    self.load_laby(self.laby)
+                    self.load_treasure(self.last_case)
+                    move_left = self.perso.load()
+                    self.bottom_text(move_left)
+                    if move_left <= 0:
+                        perso_position = self.perso.return_position()
+                        if perso_position == self.last_case:
+                            self.end_party_text("You Win!!!")
+                        else:
+                            self.end_party_text("You Loose...")
+                        self.show_path(self.longuest)
+                        self.perso.load()
+                    pygame.display.flip()
+    
     def bottom_text(self, move_left):
         label = self.myfont.render("moves left : {}".format(move_left),
                                    0, (0, 0, 0))

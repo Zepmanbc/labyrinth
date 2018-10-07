@@ -3,7 +3,7 @@
 
 import laby_gen
 """
-generer le labirynth
+generer le labyrinth
 faire un objet qui renvoi le labirynth sous forme de tableau
 avec un caractère hexa pour définir la cellule
 utiliser des labirynth prédéfini qui sont sauvegardé en json
@@ -27,6 +27,23 @@ une classe qui s'occupe des fondements du jeu
 
 def main():
     pass
+    # je créé une fenetre
+    # j'affiche le menu pour choisir la taille souaitée de labyrinthe
+    # je balance le labyrinth dans la fenetre
+    # je balance le personnage dans la fenetre
+    # je balance la barre de dialogue
+    # j'écoute les touches
+    # si une touche est appuyé je vérifie si le mouvement est possible
+    # si le mouvement est possible je change la position du personnage
+    # je met a jour la barre de dialogue
+    # je rafraichie la fenetre
+
+    # les différents cas
+    # le personnage ne peut pas bouger
+    # le personnage bouge
+    # il ne reste plus de mouvement, il faut indiquer que c'est perdu et revenir au menu
+    # le personnage est arrivé à la cible dans le nombre de pas imparti, c'est gagné, et revenir au menu
+    # dans ces 2 cas le personnage ne doit plus bouger et il faut appuyer sur entrer pour revenir au menu
 
 if __name__ == "__main__":
     main()
