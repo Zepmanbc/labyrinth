@@ -1,6 +1,5 @@
 #! /usr/bin/env python3
 # coding: utf-8
-
 """
 librairie that generates a labyrinth in a list
 see MOVES for the formating
@@ -13,7 +12,7 @@ from random import choice
 
 import numpy
 
-# generer le labirynth
+# generer le labirynthe
 # faire un objet qui renvoi le labirynth sous forme de tableau
 # avec un caractère hexa pour définir la cellule
 # utiliser des labirynth prédéfini qui sont sauvegardé en json

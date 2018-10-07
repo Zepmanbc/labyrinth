@@ -7,12 +7,9 @@ init
 call menu_loop() => show menu
 call game_loop(labyrinth_code) => start a game
 """
-
 import pygame
 from pygame.locals import *
-
 from laby_gen import *
-
 # une representation graphique en utilisant pygame
 # une classe qui s'occupe de la représentation graphique
 
@@ -33,13 +30,13 @@ class LabyGUI():
         self.laby = laby[0]
         self.longuest = laby[1]
         self.last_case = self.longuest[-1]
-        move_left = len(self.longuest) - 1
+        left_moves = len(self.longuest) - 1
         # pygame.draw.rect(self.window,
         #                  pygame.Color('#FFFFFFFF'),
         #                  (0, 0, 640, 480))
         self.load_laby(self.laby)
         self.load_treasure(self.last_case)
-        self.perso = Perso(self.window, self.STEP, self.laby, move_left)
+        self.perso = Perso(self.window, self.STEP, self.laby, left_moves)
         pygame.display.flip()
 
         # pour rester appuyé sur le bouton
@@ -66,9 +63,9 @@ class LabyGUI():
                         self.perso.left()
                     self.load_laby(self.laby)
                     self.load_treasure(self.last_case)
-                    move_left = self.perso.load()
-                    self.bottom_text(move_left)
-                    if move_left <= 0:
+                    left_moves = self.perso.load()
+                    self.bottom_text(left_moves)
+                    if left_moves <= 0:
                         perso_position = self.perso.return_position()
                         if perso_position == self.last_case:
                             self.end_party_text("You Win!!!")
@@ -77,7 +74,7 @@ class LabyGUI():
                         self.show_path(self.longuest)
                         self.perso.load()
                     pygame.display.flip()
-    
+
     def bottom_text(self, move_left):
         label = self.myfont.render("moves left : {}".format(move_left),
                                    0, (0, 0, 0))
@@ -221,6 +218,7 @@ class Perso():
 
 def main():
     """Test function"""
+
     game = LabyGUI()
     # game.menu_loop()
     labyrinth = LabyGenerator()

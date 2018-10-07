@@ -1,7 +1,10 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-import laby_gen
+from window import Window
+from menu import Menu
+from laby_ui import *
+
 """
 generer le labyrinth
 faire un objet qui renvoi le labirynth sous forme de tableau
@@ -26,7 +29,19 @@ une classe qui s'occupe des fondements du jeu
 
 
 def main():
-    pass
+    window = Window()
+    runnin_game = True
+    while runnin_game:
+        game_choice = Menu(window).run
+        if game_choice:
+            laby = LabyGenerator()
+            laby_data = laby.generate(game_choice[0], game_choice[1])
+            game = LabyGUI()
+            game.game_loop(laby_data)
+            print(laby_data)
+        else:
+            runnin_game = False
+
     # je créé une fenetre
     # j'affiche le menu pour choisir la taille souaitée de labyrinthe
     # je balance le labyrinth dans la fenetre
@@ -41,9 +56,12 @@ def main():
     # les différents cas
     # le personnage ne peut pas bouger
     # le personnage bouge
-    # il ne reste plus de mouvement, il faut indiquer que c'est perdu et revenir au menu
-    # le personnage est arrivé à la cible dans le nombre de pas imparti, c'est gagné, et revenir au menu
-    # dans ces 2 cas le personnage ne doit plus bouger et il faut appuyer sur entrer pour revenir au menu
+    # il ne reste plus de mouvement, il faut indiquer que c'est perdu et
+    # revenir au menu
+    # le personnage est arrivé à la cible dans le nombre de pas imparti,
+    # c'est gagné, et revenir au menu
+    # dans ces 2 cas le personnage ne doit plus bouger et il faut appuyer
+    # sur entrer pour revenir au menu
 
 if __name__ == "__main__":
     main()
