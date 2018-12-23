@@ -9,7 +9,7 @@ call game_loop(labyrinth_code) => start a game
 """
 import pygame
 from pygame.locals import *
-from laby_gen import *
+from .labygenerator import *
 # une representation graphique en utilisant pygame
 # une classe qui s'occupe de la représentation graphique
 
