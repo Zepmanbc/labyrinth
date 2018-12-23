@@ -4,3 +4,5 @@ __pycache__/
 archive/
 Longuest path.docx
 a faire.txt
+.coverage
+htmlcov/
