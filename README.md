@@ -1,49 +1,69 @@
-### Notes en vrac a nettoyer ###
-générer le labyrinthe
-faire un objet qui renvoi le labirynthe sous forme de tableau
-avec un caractère hexa pour définir la cellule
-utiliser des labirynthe prédéfini qui sont sauvegardé en json
-pour l'instant
+# Labyrinthe
 
-la partie principale est la gestion du jeu
-une representation graphique en utilisant pygame
-un personnage qui doit aller d'un bout à l'autre, on le déplace avec
-les fleches du clavier
-on chronometre le temps qu'il met et le nombre de pas
-on montre le nombre de pas mini possible pour faire un high score
-qui peut etre enregistrer dans un json
-on fait plusieurs niveaux avec une difficulté croissante (taille du labi)
+---
 
-une classe qui ressort un tableau du labi
-une classe qui s'occupe de la représentation graphique
-une classe qui s'occupe des fondements du jeu
+## 1. Presentation
 
-je créé une fenetre
-j'affiche le menu pour choisir la taille souaitée de labyrinthe
-je balance le labyrinthe dans la fenetre
-je balance le personnage dans la fenetre
-je balance la barre de dialogue
-j'écoute les touches
-si une touche est appuyée je vérifie si le mouvement est possible
-si le mouvement est possible je change la position du personnage
-je met a jour la barre de dialogue
-je rafraichi la fenêtre
+I made this Maze game to learn python and pyganme.
 
-les différents cas
-le personnage ne peut pas bouger
-le personnage bouge
-il ne reste plus de mouvement, il faut indiquer que c'est perdu et
-revenir au menu
-le personnage est arrivé à la cible dans le nombre de pas imparti,
-c'est gagné, et revenir au menu
-dans ces 2 cas le personnage ne doit plus bouger et il faut appuyer
-sur entrer pour revenir au menu
+There is 3 sizes of mazes, each is generated randomly. the Goal is to reach the treasure with the less moves (not a big chalenge...). The treasure is positionned at the end of the longuest path.
 
+## 2. Installation
+clone the repo
+> git clone 
 
-un personnage qui doit aller d'un bout à l'autre, on le déplace avec
-les fleches du clavier
-on chronomêtre le temps qu'il met et le nombre de pas
-on montre le nombre de pas mini possible pour faire un high score
-qui peut être enregistré dans un json
-on fait plusieurs niveaux avec une difficulté croissante (taille du labi)
-une classe qui s'occupe des fondements du jeu
+go in the folder
+> cd labyrinth
+
+create a virtual environment
+> virtualenv env -p python3
+
+install requirements
+> pip install -r requirements.txt
+
+allow execution of the game
+> chmod +x main.py
+
+## 3. How to play
+launch the game
+> ./main.py
+
+_Title menu_
+
+![Main title](doc/title.png)
+
+Use arrow keys tu go **up** or **down**
+
+Select with ̀**Enter**
+
+press **Q** if you want to go back to title menu
+
+_Small Maze 10x10_
+
+![Small Maze](doc/small.png)
+
+_Medium Maze 15x13_
+
+![Medium Maze](doc/medium.png)
+
+_Large Maze 21x15_
+
+![Large Maze](doc/large.png)
+
+When you reach the treasure, the game is over.
+
+Red dots show you the shorter path.
+
+![You Win](doc/win.png)
+
+## 4. Code notes
+
+_to do..._
+
+## 5. To do list
+
+* Stop the game when the treasure has been reached
+* Lean that there is a 'e' at the end of labyrinthe
+* add a time record
+* record best times with longuest path?
+* any idea for cool feature ? tell me
