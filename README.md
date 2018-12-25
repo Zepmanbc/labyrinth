@@ -4,13 +4,13 @@
 
 ## 1. Presentation
 
-I made this Maze game to learn python and pyganme.
+I made this Maze game to learn python and pygame.
 
-There is 3 sizes of mazes, each is generated randomly. the Goal is to reach the treasure with the less moves (not a big chalenge...). The treasure is positionned at the end of the longuest path.
+There is 3 sizes of mazes, each is generated randomly. the Goal is to reach the treasure with the less moves (not a big challenge...). The treasure is positionned at the end of the longuest path.
 
 ## 2. Installation
 clone the repo
-> git clone 
+> git clone https://github.com/Zepmanbc/labyrinth.git
 
 go in the folder
 > cd labyrinth
@@ -26,7 +26,7 @@ allow execution of the game
 
 ## 3. How to play
 launch the game
-> ./main.py
+> python main.py
 
 _Title menu_
 
@@ -34,7 +34,9 @@ _Title menu_
 
 Use arrow keys tu go **up** or **down**
 
-Select with ̀**Enter**
+Select with **Enter**
+
+In the game use the arrows to move the avatar
 
 press **Q** if you want to go back to title menu
 
@@ -62,8 +64,9 @@ _to do..._
 
 ## 5. To do list
 
+* Do some unit tests
 * Stop the game when the treasure has been reached
-* Lean that there is a 'e' at the end of labyrinthe
+* Learn that there is a 'e' at the end of labyrinthe
 * add a time record
 * record best times with longuest path?
 * any idea for cool feature ? tell me
