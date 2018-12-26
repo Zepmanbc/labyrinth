@@ -57,8 +57,10 @@ class LabyGenerator():
         "F": (1, 0, 1, 0)
     }
 
+    DATA_FILE = "data/laby_data.json"
+
     def __init__(self):
-        self.laby_data_file = "data/laby_data.json"
+        self.laby_data_file = self.DATA_FILE
         if not os.path.exists(self.laby_data_file):
             file = open(self.laby_data_file, "w")
             json.dump({}, file)
@@ -210,8 +212,7 @@ class LabyGenerator():
         try:
             return data[str(number)]
         except KeyError:
-            print("laby number does not exist")
-            return False
+            raise KeyError("laby number does not exist")
 
     def save_laby(self, number, code, longuest):
         """ save a existing laby in a json file """
@@ -229,13 +230,13 @@ class LabyGenerator():
         return data
 
 
-def main():
-    """test function"""
-    # os.remove("data/laby_data.json")
-    laby = LabyGenerator()
-    code, longuest = laby.generate(10, 10)
-    laby.save_laby(0, code, longuest)
-    # print(laby.getout(0))
+# def main():
+#     """test function"""
+#     # os.remove("data/laby_data.json")
+#     laby = LabyGenerator()
+#     code, longuest = laby.generate(10, 10)
+#     laby.save_laby(0, code, longuest)
+#     # print(laby.getout(0))
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

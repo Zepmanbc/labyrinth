@@ -14,10 +14,10 @@ class Window():
         self.window = pygame.display.set_mode((640, 480))
 
 
-def main():
-    """Test function"""
-    window = Window()
-    pass
+# def main():
+#     """Test function"""
+#     window = Window()
+#     pass
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
