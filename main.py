@@ -5,8 +5,8 @@ from labyrinthe import *
 
 def main():
     window = Window()
-    runnin_game = True
-    while runnin_game:
+    running_game = True
+    while running_game:
         game_choice = Menu(window).run
         if game_choice:
             laby = LabyGenerator()
@@ -15,7 +15,7 @@ def main():
             game.game_loop(laby_data)
             print(laby_data)
         else:
-            runnin_game = False
+            running_game = False
 
 if __name__ == "__main__":
     main()
